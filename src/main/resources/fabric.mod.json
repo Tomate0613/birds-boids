@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "id": "birds-boids",
+  "version": "${version}",
+  "name": "Birds Boids",
+  "description": "",
+  "authors": [],
+  "contact": {},
+  "license": "MIT",
+  "icon": "assets/birds-boids/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "dev.doublekekse.birdsboids.BirdsBoids"
+    ],
+    "client": [
+      "dev.doublekekse.birdsboids.client.BirdsBoidsClient"
+    ]
+  },
+  "mixins": [],
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric": "*",
+    "minecraft": "${minecraft_version}"
+  }
+}
