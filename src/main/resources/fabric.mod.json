@@ -7,7 +7,7 @@
   "authors": [],
   "contact": {},
   "license": "MIT",
-  "icon": "assets/birds-boids/icon.png",
+  "icon": "assets/birdsboids/icon.png",
   "environment": "*",
   "entrypoints": {
     "main": [
