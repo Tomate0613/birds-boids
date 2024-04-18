@@ -39,7 +39,7 @@ public class Bird extends FlyingMob {
     }
 
     public static boolean checkAnimalSpawnRules(EntityType<Bird> entityType, LevelAccessor levelAccessor, MobSpawnType mobSpawnType, BlockPos blockPos, RandomSource randomSource) {
-        boolean isBrightEnough = MobSpawnType.ignoresLightRequirements(mobSpawnType) || isBrightEnoughToSpawn(levelAccessor, blockPos);
+        boolean isBrightEnough = isBrightEnoughToSpawn(levelAccessor, blockPos);
         return levelAccessor.getBlockState(blockPos.below()).is(BlockTags.ANIMALS_SPAWNABLE_ON) && isBrightEnough;
     }
 
