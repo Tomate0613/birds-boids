@@ -7,15 +7,11 @@ import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
-import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.EntityDimensions;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.MobCategory;
-import net.minecraft.world.entity.SpawnPlacements;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.levelgen.Heightmap;
@@ -24,7 +20,7 @@ public class BirdsBoids implements ModInitializer {
     public static final EntityType<Bird> BIRD = Registry.register(
             BuiltInRegistries.ENTITY_TYPE,
             new ResourceLocation("birdsboids", "bird"),
-            FabricEntityTypeBuilder.create(MobCategory.AMBIENT, Bird::new).dimensions(EntityDimensions.fixed(1.5f, 0.6f)).build()
+            EntityType.Builder.of(Bird::new, MobCategory.AMBIENT).sized(1.5f, 0.6f).build()
     );
     public static final Item BIRD_ITEM = new SpawnEggItem(BIRD, 0xFF4D3927, 0xFF7D706C, new Item.Properties());
     public static final CreativeModeTab BIRDS_CREATIVE_MODE_TAB = FabricItemGroup.builder()
@@ -41,7 +37,7 @@ public class BirdsBoids implements ModInitializer {
         Registry.register(BuiltInRegistries.ITEM, new ResourceLocation("birdsboids", "bird_spawn_egg"), BIRD_ITEM);
 
         BiomeModifications.addSpawn(BiomeSelectors.includeByKey(Biomes.FOREST), MobCategory.AMBIENT, BIRD, 50, 7, 10);
-        SpawnPlacements.register(BIRD, SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING, Bird::checkAnimalSpawnRules);
+        SpawnPlacements.register(BIRD, SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING, Bird::checkAnimalSpawnRules);
 
         ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.SPAWN_EGGS).register(content -> {
             content.accept(BIRD_ITEM);
