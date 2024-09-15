@@ -5,8 +5,6 @@ package dev.doublekekse.birdsboids.entities.bird;
 // Exported for Minecraft version 1.17 or later with Mojang mappings
 
 
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
 import dev.doublekekse.birdsboids.BirdsBoids;
 import net.minecraft.client.model.HierarchicalModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
@@ -84,11 +82,6 @@ public class BirdModel<T extends Bird> extends HierarchicalModel<T> {
         this.root().getAllParts().forEach(ModelPart::resetPose);
 
         animate(entity.flyAnimationState, BirdAnimation.FLAP, ageInTicks, 1);
-    }
-
-    @Override
-    public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
-        root.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
     }
 
     @Override
