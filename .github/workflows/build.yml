@@ -1,4 +1,4 @@
-name: buildd
+name: build
 on: [pull_request, push]
 
 jobs:
