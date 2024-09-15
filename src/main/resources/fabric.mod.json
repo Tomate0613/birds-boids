@@ -3,8 +3,10 @@
   "id": "birds-boids",
   "version": "${version}",
   "name": "Birds Boids",
-  "description": "",
-  "authors": [],
+  "description": "Adds birds to the game",
+  "authors": [
+    "Tomate0613"
+  ],
   "contact": {},
   "license": "MIT",
   "icon": "assets/birdsboids/icon.png",
@@ -21,6 +23,7 @@
   "depends": {
     "fabricloader": ">=${loader_version}",
     "fabric": "*",
+    "boids": "*",
     "minecraft": "${minecraft_version}"
   }
 }
