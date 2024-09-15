@@ -31,6 +31,6 @@ jobs:
         if: ${{ runner.os == 'Linux' && matrix.java == '17' }}
         uses: Kir-Antipov/mc-publish@v3.3
         with:
-          modrinth-id: FGWvEfgd
+          modrinth-id: CvX6rOtB
           modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
-          version-type: alpha
+          version-type: release
