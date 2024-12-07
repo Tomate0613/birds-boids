@@ -16,7 +16,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import dev.doublekekse.boids.goals.BoidGoal;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 public class Bird extends FlyingMob {
     public final AnimationState flyAnimationState = new AnimationState();
@@ -39,7 +38,7 @@ public class Bird extends FlyingMob {
     }
 
     public static boolean checkAnimalSpawnRules(EntityType<Bird> entityType, LevelAccessor levelAccessor, MobSpawnType mobSpawnType, BlockPos blockPos, RandomSource randomSource) {
-        boolean isBrightEnough = isBrightEnoughToSpawn(levelAccessor, blockPos);
+        boolean isBrightEnough = MobSpawnType.ignoresLightRequirements(mobSpawnType) || isBrightEnoughToSpawn(levelAccessor, blockPos);
         return levelAccessor.getBlockState(blockPos.below()).is(BlockTags.ANIMALS_SPAWNABLE_ON) && isBrightEnough;
     }
 
@@ -51,7 +50,7 @@ public class Bird extends FlyingMob {
     public void tick() {
         super.tick();
         var animationTime = (tickCount + flapOffset) % (20 * 0.5F);
-        if(animationTime < 4 && animationTime > 2 && --flapCooldownTick < 0) {
+        if (animationTime < 4 && animationTime > 2 && --flapCooldownTick < 0) {
             this.level().playLocalSound(this.getX(), this.getY(), this.getZ(), SoundEvents.PHANTOM_FLAP, this.getSoundSource(), 0.1f + this.random.nextFloat() * 0.05F, 1.95F + this.random.nextFloat() * 0.05F, false);
             flapCooldownTick = 0;
         }

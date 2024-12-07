@@ -1,5 +1,8 @@
 {
   "entity.birdsboids.bird": "Bird",
   "item.birdsboids.bird_spawn_egg": "Bird Spawn Egg",
-  "itemGroup.birdsboids.birds": "Birds"
+  "itemGroup.birdsboids.birds": "Birds",
+  "subtitles.entity.birdsboids.bird.hurt": "Bird hurts",
+  "subtitles.entity.birdsboids.bird.death": "Bird dies",
+  "subtitles.entity.birdsboids.bird.flap": "Bird flaps"
 }

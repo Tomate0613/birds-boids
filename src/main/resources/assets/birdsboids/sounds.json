@@ -1,0 +1,65 @@
+{
+  "entity.bird.hurt": {
+    "sounds": [
+      {
+        "name": "mob/fox/hurt1",
+        "volume": 0.75
+      },
+      {
+        "name": "mob/fox/hurt2",
+        "volume": 0.75
+      },
+      {
+        "name": "mob/fox/hurt3",
+        "volume": 0.75
+      },
+      {
+        "name": "mob/fox/hurt4",
+        "volume": 0.75
+      }
+    ],
+    "subtitle": "subtitles.entity.birdsboids.bird.hurt"
+  },
+  "entity.bird.death": {
+    "sounds": [
+      {
+        "name": "mob/fox/death1",
+        "volume": 0.9
+      },
+      {
+        "name": "mob/fox/death2",
+        "volume": 0.9
+      }
+    ],
+    "subtitle": "subtitles.entity.birdsboids.bird.death"
+  },
+  "entity.bird.flap": {
+    "sounds": [
+      {
+        "name": "mob/phantom/flap1",
+        "volume": 0.9
+      },
+      {
+        "name": "mob/phantom/flap2",
+        "volume": 0.9
+      },
+      {
+        "name": "mob/phantom/flap3",
+        "volume": 0.9
+      },
+      {
+        "name": "mob/phantom/flap4",
+        "volume": 0.9
+      },
+      {
+        "name": "mob/phantom/flap5",
+        "volume": 0.9
+      },
+      {
+        "name": "mob/phantom/flap6",
+        "volume": 0.9
+      }
+    ],
+    "subtitle": "subtitles.entity.birdsboids.bird.flap"
+  }
+}
