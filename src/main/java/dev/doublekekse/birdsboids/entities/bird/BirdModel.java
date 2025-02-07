@@ -6,19 +6,21 @@ package dev.doublekekse.birdsboids.entities.bird;
 
 
 import dev.doublekekse.birdsboids.BirdsBoids;
-import net.minecraft.client.model.HierarchicalModel;
+import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
+import net.minecraft.client.renderer.entity.state.EntityRenderState;
 import org.jetbrains.annotations.NotNull;
 
-public class BirdModel<T extends Bird> extends HierarchicalModel<T> {
+public class BirdModel<T extends Bird> extends EntityModel<EntityRenderState> {
     // This layer location should be baked with EntityRendererProvider.Context in the entity renderer and passed into this model's constructor
     public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(BirdsBoids.id("birdentitymodel"), "main");
     private final ModelPart root;
 
     public BirdModel(ModelPart root) {
+        super(root);
         this.root = root.getChild("root");
     }
 
@@ -78,14 +80,9 @@ public class BirdModel<T extends Bird> extends HierarchicalModel<T> {
     }
 
     @Override
-    public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-        this.root().getAllParts().forEach(ModelPart::resetPose);
-
-        animate(entity.flyAnimationState, BirdAnimation.FLAP, ageInTicks, 1);
-    }
-
-    @Override
-    public @NotNull ModelPart root() {
-        return root;
+    public void setupAnim(EntityRenderState entityRenderState) {
+        super.setupAnim(entityRenderState);
+        //this.root().getAllParts().forEach(ModelPart::resetPose);
+        //animate(BirdAnimation.FLAP, BirdAnimation.FLAP, entityRenderState.ageInTicks, 1);
     }
 }
