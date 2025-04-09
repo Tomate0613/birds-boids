@@ -8,7 +8,7 @@ import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
 import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.NotNull;
 
-public class BirdRenderer extends MobRenderer<Bird, LivingEntityRenderState, BirdModel<Bird>> {
+public class BirdRenderer extends MobRenderer<Bird, BirdRenderState, BirdModel<Bird>> {
     private static final ResourceLocation TEXTURE_LOCATION = BirdsBoids.id("textures/entity/bird/bird.png");
 
     public BirdRenderer(EntityRendererProvider.Context context) {
@@ -16,12 +16,19 @@ public class BirdRenderer extends MobRenderer<Bird, LivingEntityRenderState, Bir
     }
 
     @Override
-    public LivingEntityRenderState createRenderState() {
-        return new LivingEntityRenderState();
+    public BirdRenderState createRenderState() {
+        return new BirdRenderState();
     }
 
     @Override
-    public ResourceLocation getTextureLocation(LivingEntityRenderState livingEntityRenderState) {
+    public ResourceLocation getTextureLocation(BirdRenderState renderState) {
         return TEXTURE_LOCATION;
+    }
+
+    @Override
+    public void extractRenderState(Bird bird, BirdRenderState renderState, float f) {
+        super.extractRenderState(bird, renderState, f);
+
+        renderState.flyAnimationState.copyFrom(bird.flyAnimationState);
     }
 }
