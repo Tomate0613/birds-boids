@@ -30,19 +30,10 @@ public class BirdsBoids implements ModInitializer {
     public static final TagKey<Biome> SPAWNS_BIRDS = TagKey.create(Registries.BIOME, id("spawns_birds"));
 
     public static final EntityType<Bird> BIRD = Registry.register(
-            BuiltInRegistries.ENTITY_TYPE,
-            id("bird"),
-            EntityType.Builder.of(Bird::new, MobCategory.AMBIENT).sized(1.5f, 0.6f).build(ResourceKey.create(Registries.ENTITY_TYPE, id("bird")))
+        BuiltInRegistries.ENTITY_TYPE,
+        id("bird"),
+        EntityType.Builder.of(Bird::new, MobCategory.AMBIENT).sized(1.5f, 0.6f).build(ResourceKey.create(Registries.ENTITY_TYPE, id("bird")))
     );
-    /*
-    public static final CreativeModeTab BIRDS_CREATIVE_MODE_TAB = FabricItemGroup.builder()
-            .icon(() -> new ItemStack(BIRD_ITEM))
-            .title(Component.translatable("itemGroup.birdsboids.birds"))
-            .displayItems((context, entries) -> {
-                entries.accept(BIRD_ITEM);
-            })
-            .build();
-     */
 
     @Override
     public void onInitialize() {
@@ -50,18 +41,13 @@ public class BirdsBoids implements ModInitializer {
 
         BirdItems.register();
 
-        //Registry.register(BuiltInRegistries.ITEM, id("bird_spawn_egg"), BIRD_ITEM);
-
         BiomeModifications.addSpawn(BiomeSelectors.tag(SPAWNS_BIRDS), MobCategory.AMBIENT, BIRD, 50, 7, 10);
         SpawnPlacements.register(BIRD, SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING, Bird::checkBirdSpawnRule);
 
-        /*
         ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.SPAWN_EGGS).register(content -> {
             content.accept(BIRD_ITEM);
         });
-         */
 
-        //Registry.register(BuiltInRegistries.CREATIVE_MODE_TAB, id("birds"), BIRDS_CREATIVE_MODE_TAB);
         FabricDefaultAttributeRegistry.register(BIRD, Bird.createMobAttributes());
 
         SoundEvents.register();
