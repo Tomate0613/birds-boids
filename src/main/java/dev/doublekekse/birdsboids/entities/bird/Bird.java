@@ -1,10 +1,10 @@
 package dev.doublekekse.birdsboids.entities.bird;
 
 import dev.doublekekse.birdsboids.goals.DynamicHeightBoundsGoal;
+import dev.doublekekse.birdsboids.registry.SoundEvents;
 import dev.doublekekse.boids.goals.LimitSpeedAndLookInVelocityDirectionGoal;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvent;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageSource;
@@ -51,7 +51,7 @@ public class Bird extends FlyingMob {
         super.tick();
         var animationTime = (tickCount + flapOffset) % (20 * 0.5F);
         if (animationTime < 4 && animationTime > 2 && --flapCooldownTick < 0) {
-            this.level().playLocalSound(this.getX(), this.getY(), this.getZ(), SoundEvents.PHANTOM_FLAP, this.getSoundSource(), 0.1f + this.random.nextFloat() * 0.05F, 1.95F + this.random.nextFloat() * 0.05F, false);
+            this.level().playLocalSound(this.getX(), this.getY(), this.getZ(), SoundEvents.BIRD_FLAP, this.getSoundSource(), 0.1f + this.random.nextFloat() * 0.05F, 1.95F + this.random.nextFloat() * 0.05F, false);
             flapCooldownTick = 0;
         }
         flyAnimationState.startIfStopped(tickCount + flapOffset);
@@ -59,11 +59,11 @@ public class Bird extends FlyingMob {
 
     @Override
     protected SoundEvent getHurtSound(DamageSource damageSource) {
-        return SoundEvents.FOX_HURT;
+        return SoundEvents.BIRD_HURT;
     }
 
     @Override
     protected SoundEvent getDeathSound() {
-        return SoundEvents.FOX_DEATH;
+        return SoundEvents.BIRD_DEATH;
     }
 }
