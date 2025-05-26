@@ -27,26 +27,26 @@ public class BirdsBoids implements ModInitializer {
 
     public static final String MOD_ID = "birdsboids";
 
-    public static final TagKey<Biome> SPAWNS_BIRDS = TagKey.create(Registries.BIOME, new ResourceLocation("birdsboids","spawns_birds"));
+    public static final TagKey<Biome> SPAWNS_BIRDS = TagKey.create(Registries.BIOME, new ResourceLocation("birdsboids", "spawns_birds"));
 
     public static final EntityType<Bird> BIRD = Registry.register(
-            BuiltInRegistries.ENTITY_TYPE,
-            new ResourceLocation("birdsboids", "bird"),
-            FabricEntityTypeBuilder.create(MobCategory.AMBIENT, Bird::new).dimensions(EntityDimensions.fixed(1.5f, 0.6f)).build()
+        BuiltInRegistries.ENTITY_TYPE,
+        id("bird"),
+        FabricEntityTypeBuilder.create(MobCategory.AMBIENT, Bird::new).dimensions(EntityDimensions.fixed(1.5f, 0.6f)).build()
     );
     public static final Item BIRD_ITEM = new SpawnEggItem(BIRD, 0xFF4D3927, 0xFF7D706C, new Item.Properties());
     public static final CreativeModeTab BIRDS_CREATIVE_MODE_TAB = FabricItemGroup.builder()
-            .icon(() -> new ItemStack(BIRD_ITEM))
-            .title(Component.translatable("itemGroup.birdsboids.birds"))
-            .displayItems((context, entries) -> {
-                entries.accept(BIRD_ITEM);
-            })
-            .build();
+        .icon(() -> new ItemStack(BIRD_ITEM))
+        .title(Component.translatable("itemGroup.birdsboids.birds"))
+        .displayItems((context, entries) -> {
+            entries.accept(BIRD_ITEM);
+        })
+        .build();
 
     @Override
     public void onInitialize() {
         FabricDefaultAttributeRegistry.register(BIRD, Bird.createMobAttributes());
-        Registry.register(BuiltInRegistries.ITEM, new ResourceLocation("birdsboids", "bird_spawn_egg"), BIRD_ITEM);
+        Registry.register(BuiltInRegistries.ITEM, id("bird_spawn_egg"), BIRD_ITEM);
 
         BiomeModifications.addSpawn(BiomeSelectors.tag(SPAWNS_BIRDS), MobCategory.AMBIENT, BIRD, 50, 7, 10);
         SpawnPlacements.register(BIRD, SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING, Bird::checkAnimalSpawnRules);
@@ -55,9 +55,13 @@ public class BirdsBoids implements ModInitializer {
             content.accept(BIRD_ITEM);
         });
 
-        Registry.register(BuiltInRegistries.CREATIVE_MODE_TAB, new ResourceLocation("birdsboids", "birds"), BIRDS_CREATIVE_MODE_TAB);
+        Registry.register(BuiltInRegistries.CREATIVE_MODE_TAB, id("birds"), BIRDS_CREATIVE_MODE_TAB);
         FabricDefaultAttributeRegistry.register(BIRD, Bird.createMobAttributes());
 
         SoundEvents.register();
+    }
+
+    public static ResourceLocation id(String path) {
+        return new ResourceLocation(MOD_ID, path);
     }
 }
