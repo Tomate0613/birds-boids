@@ -10,17 +10,24 @@ import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRe
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.EntityDimensions;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.entity.SpawnPlacements;
 import net.minecraft.world.item.*;
-import net.minecraft.world.level.biome.Biomes;
+import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.levelgen.Heightmap;
 
 public class BirdsBoids implements ModInitializer {
+
+    public static final String MOD_ID = "birdsboids";
+
+    public static final TagKey<Biome> SPAWNS_BIRDS = TagKey.create(Registries.BIOME, new ResourceLocation("birdsboids","spawns_birds"));
+
     public static final EntityType<Bird> BIRD = Registry.register(
             BuiltInRegistries.ENTITY_TYPE,
             new ResourceLocation("birdsboids", "bird"),
@@ -40,7 +47,7 @@ public class BirdsBoids implements ModInitializer {
         FabricDefaultAttributeRegistry.register(BIRD, Bird.createMobAttributes());
         Registry.register(BuiltInRegistries.ITEM, new ResourceLocation("birdsboids", "bird_spawn_egg"), BIRD_ITEM);
 
-        BiomeModifications.addSpawn(BiomeSelectors.includeByKey(Biomes.FOREST), MobCategory.AMBIENT, BIRD, 50, 7, 10);
+        BiomeModifications.addSpawn(BiomeSelectors.tag(SPAWNS_BIRDS), MobCategory.AMBIENT, BIRD, 50, 7, 10);
         SpawnPlacements.register(BIRD, SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING, Bird::checkAnimalSpawnRules);
 
         ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.SPAWN_EGGS).register(content -> {
