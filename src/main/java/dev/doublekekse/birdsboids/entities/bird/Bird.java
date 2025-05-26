@@ -1,6 +1,6 @@
 package dev.doublekekse.birdsboids.entities.bird;
 
-import dev.doublekekse.boids.goals.HeightBoundsGoal;
+import dev.doublekekse.birdsboids.goals.DynamicHeightBoundsGoal;
 import dev.doublekekse.boids.goals.LimitSpeedAndLookInVelocityDirectionGoal;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvent;
@@ -33,7 +33,7 @@ public class Bird extends FlyingMob {
     }
 
     protected void registerGoals() {
-        this.goalSelector.addGoal(1, new HeightBoundsGoal(this, 100, 120));
+        this.goalSelector.addGoal(1, new DynamicHeightBoundsGoal(this, 15, 120));
         this.goalSelector.addGoal(2, new BoidGoal(this, 0.1f, 2, 8 / 20f, 1 / 25f));
         this.goalSelector.addGoal(3, new LimitSpeedAndLookInVelocityDirectionGoal(this, 0.3f, 0.7f));
     }
