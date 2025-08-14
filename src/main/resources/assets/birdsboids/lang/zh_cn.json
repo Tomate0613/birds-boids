@@ -1,0 +1,8 @@
+{
+  "entity.birdsboids.bird": "鸟",
+  "item.birdsboids.bird_spawn_egg": "鸟",
+  "itemGroup.birdsboids.birds": "鸟",
+  "subtitles.entity.birdsboids.bird.hurt": "鸟受伤",
+  "subtitles.entity.birdsboids.bird.death": "鸟死亡",
+  "subtitles.entity.birdsboids.bird.flap": "鸟翼"
+}
