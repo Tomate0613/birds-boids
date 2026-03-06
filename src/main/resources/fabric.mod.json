@@ -22,7 +22,7 @@
   "mixins": [],
   "depends": {
     "fabricloader": ">=${loader_version}",
-    "fabric": "*",
+    "fabric-api": "*",
     "boids": "*",
     "minecraft": "${compat_minecraft_version}"
   }
