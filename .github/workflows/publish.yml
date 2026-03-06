@@ -31,10 +31,7 @@ jobs:
         if: ${{ runner.os == 'Linux' }}
         uses: Kir-Antipov/mc-publish@v3.3
         with:
-          modrinth-id: 2OckSy74
+          modrinth-id: CvX6rOtB
           modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
-
-          dependencies: |
-            fabric-api
 
           version-type: release
