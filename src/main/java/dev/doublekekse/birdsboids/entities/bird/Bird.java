@@ -12,7 +12,6 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.level.BlockAndTintGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import dev.doublekekse.boids.goals.BoidGoal;
@@ -55,8 +54,8 @@ public class Bird extends Mob {
         return levelAccessor.getBlockState(blockPos.below()).is(BlockTags.ANIMALS_SPAWNABLE_ON) && bl;
     }
 
-    protected static boolean isBrightEnoughToSpawn(BlockAndTintGetter blockAndTintGetter, BlockPos blockPos) {
-        return blockAndTintGetter.getRawBrightness(blockPos, 0) > 8;
+    protected static boolean isBrightEnoughToSpawn(LevelAccessor levelAccessor, BlockPos blockPos) {
+        return levelAccessor.getRawBrightness(blockPos, 0) > 8;
     }
 
     @Override

@@ -1,7 +1,7 @@
 package dev.doublekekse.birdsboids.registry;
 
 import dev.doublekekse.birdsboids.BirdsBoids;
-import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
+import net.fabricmc.fabric.api.creativetab.v1.FabricCreativeModeTab;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
@@ -20,7 +20,7 @@ public class BirdItems {
     public static final Item BIRD_ITEM = register((key) -> new SpawnEggItem(new Item.Properties().setId(key).spawnEgg(BIRD)), "bird_spawn_egg");
 
     public static final CreativeModeTab BIRDS_CREATIVE_MODE_TAB = register(
-        FabricItemGroup.builder()
+        FabricCreativeModeTab.builder()
             .icon(() -> new ItemStack(BIRD_ITEM))
             .displayItems((context, entries) -> {
                 entries.accept(BIRD_ITEM);
