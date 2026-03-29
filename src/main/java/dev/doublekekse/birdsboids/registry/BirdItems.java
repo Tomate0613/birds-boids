@@ -17,7 +17,7 @@ import java.util.function.Function;
 import static dev.doublekekse.birdsboids.BirdsBoids.BIRD;
 
 public class BirdItems {
-    public static final Item BIRD_ITEM = register((key) -> new SpawnEggItem(BIRD, new Item.Properties().setId(key)), "bird_spawn_egg");
+    public static final Item BIRD_ITEM = register((key) -> new SpawnEggItem(new Item.Properties().setId(key).spawnEgg(BIRD)), "bird_spawn_egg");
 
     public static final CreativeModeTab BIRDS_CREATIVE_MODE_TAB = register(
         FabricItemGroup.builder()
@@ -35,7 +35,7 @@ public class BirdItems {
 
     private static Item register(Function<ResourceKey<Item>, Item> item, String path) {
         ResourceKey<Item> registryKey = ResourceKey.create(Registries.ITEM, BirdsBoids.id(path));
-        return Registry.register(BuiltInRegistries.ITEM, registryKey.location(), item.apply(registryKey));
+        return Registry.register(BuiltInRegistries.ITEM, registryKey.identifier(), item.apply(registryKey));
     }
 
     public static void register() {

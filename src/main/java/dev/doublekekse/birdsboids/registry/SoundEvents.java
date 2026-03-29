@@ -11,8 +11,8 @@ public class SoundEvents {
     public static final SoundEvent BIRD_FLAP = register("entity.bird.flap");
 
     private static SoundEvent register(String id) {
-        var resourceLocation = BirdsBoids.id(id);
-        return Registry.register(BuiltInRegistries.SOUND_EVENT, resourceLocation, SoundEvent.createVariableRangeEvent(resourceLocation));
+        var identifier = BirdsBoids.id(id);
+        return Registry.register(BuiltInRegistries.SOUND_EVENT, identifier, SoundEvent.createVariableRangeEvent(identifier));
     }
 
     public static void register() {

@@ -5,6 +5,7 @@ package dev.doublekekse.birdsboids.entities.bird;
 // Exported for Minecraft version 1.17 or later with Mojang mappings
 
 import dev.doublekekse.birdsboids.BirdsBoids;
+import net.minecraft.client.animation.KeyframeAnimation;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
@@ -14,11 +15,12 @@ import net.minecraft.client.model.geom.builders.*;
 public class BirdModel<T extends Bird> extends EntityModel<BirdRenderState> {
     // This layer location should be baked with EntityRendererProvider.Context in the entity renderer and passed into this model's constructor
     public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(BirdsBoids.id("birdentitymodel"), "main");
-    private final ModelPart root;
+
+    private final KeyframeAnimation flapAnimation;
 
     public BirdModel(ModelPart root) {
         super(root);
-        this.root = root.getChild("root");
+        flapAnimation = BirdAnimation.FLAP.bake(root);
     }
 
     public static LayerDefinition createBodyLayer() {
@@ -80,6 +82,9 @@ public class BirdModel<T extends Bird> extends EntityModel<BirdRenderState> {
     public void setupAnim(BirdRenderState renderState) {
         super.setupAnim(renderState);
         //this.root().getAllParts().forEach(ModelPart::resetPose);
-        animate(renderState.flyAnimationState, BirdAnimation.FLAP, renderState.ageInTicks, 1);
+        //BirdAnimation.FLAP.
+        flapAnimation.apply(renderState.flyAnimationState, renderState.ageInTicks);
+        //flapAnimation.apply(renderState.flyAnimationState, renderState.ageInTicks, 0);
+        //animate(, 1);
     }
 }

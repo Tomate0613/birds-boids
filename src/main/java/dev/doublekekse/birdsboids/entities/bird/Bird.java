@@ -2,6 +2,7 @@ package dev.doublekekse.birdsboids.entities.bird;
 
 import dev.doublekekse.birdsboids.registry.SoundEvents;
 import dev.doublekekse.birdsboids.goals.DynamicHeightBoundsGoal;
+import dev.doublekekse.boids.BoidsSimulation;
 import dev.doublekekse.boids.goals.LimitSpeedAndLookInVelocityDirectionGoal;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvent;
@@ -11,19 +12,18 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.level.BlockAndTintGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import dev.doublekekse.boids.goals.BoidGoal;
 import org.jetbrains.annotations.NotNull;
 
-public class Bird extends FlyingMob {
+public class Bird extends Mob {
     public final AnimationState flyAnimationState = new AnimationState();
     float flapCooldownTick = 0;
     final int flapOffset;
 
-    public Bird(EntityType<? extends FlyingMob> entityType, Level level) {
+    public Bird(EntityType<Bird> entityType, Level level) {
         super(entityType, level);
         flapOffset = getRandom().nextInt(0, 10);
     }
@@ -34,7 +34,19 @@ public class Bird extends FlyingMob {
 
     protected void registerGoals() {
         this.goalSelector.addGoal(1, new DynamicHeightBoundsGoal(this, 15, 120));
-        this.goalSelector.addGoal(2, new BoidGoal(this, 0.1f, 2, 8 / 20f, 1 / 25f));
+
+        var simulation = new BoidsSimulation(
+            .1f,
+            2,
+            Float.NEGATIVE_INFINITY,
+            8 / 20f,
+            Float.NEGATIVE_INFINITY,
+            1 / 25f,
+            Float.NEGATIVE_INFINITY,
+            0.04f
+        );
+
+        this.goalSelector.addGoal(2, new BoidGoal(this, simulation));
         this.goalSelector.addGoal(3, new LimitSpeedAndLookInVelocityDirectionGoal(this, 0.3f, 0.7f));
     }
 
@@ -50,6 +62,8 @@ public class Bird extends FlyingMob {
     @Override
     public void tick() {
         super.tick();
+        setNoGravity(true);
+
         var animationTime = (tickCount + flapOffset) % (20 * 0.5F);
         if (animationTime < 4 && animationTime > 2 && --flapCooldownTick < 0) {
             this.level().playLocalSound(this.getX(), this.getY(), this.getZ(), SoundEvents.BIRD_FLAP, this.getSoundSource(), 0.1f + this.random.nextFloat() * 0.05F, 1.95F + this.random.nextFloat() * 0.05F, false);

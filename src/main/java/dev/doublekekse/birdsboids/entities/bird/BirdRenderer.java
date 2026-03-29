@@ -3,13 +3,10 @@ package dev.doublekekse.birdsboids.entities.bird;
 import dev.doublekekse.birdsboids.BirdsBoids;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
-import net.minecraft.client.renderer.entity.state.EntityRenderState;
-import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
-import net.minecraft.resources.ResourceLocation;
-import org.jetbrains.annotations.NotNull;
+import net.minecraft.resources.Identifier;
 
 public class BirdRenderer extends MobRenderer<Bird, BirdRenderState, BirdModel<Bird>> {
-    private static final ResourceLocation TEXTURE_LOCATION = BirdsBoids.id("textures/entity/bird/bird.png");
+    private static final Identifier TEXTURE_LOCATION = BirdsBoids.id("textures/entity/bird/bird.png");
 
     public BirdRenderer(EntityRendererProvider.Context context) {
         super(context, new BirdModel<>(context.bakeLayer(BirdModel.LAYER_LOCATION)), 0.5f);
@@ -21,7 +18,7 @@ public class BirdRenderer extends MobRenderer<Bird, BirdRenderState, BirdModel<B
     }
 
     @Override
-    public ResourceLocation getTextureLocation(BirdRenderState renderState) {
+    public Identifier getTextureLocation(BirdRenderState renderState) {
         return TEXTURE_LOCATION;
     }
 
